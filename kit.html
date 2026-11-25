@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>따라 만들기 키트 · 수업에 맞춘 플랫폼, 이렇게 만들었어요</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Nanum+Myeongjo:wght@700;800&display=swap">
+<style>
+:root{
+  --bg:#F3F5F9; --surface:#FFFFFF; --surface-2:#EAEFF6; --ink:#16233A; --muted:#55627A; --line:#D6DDE8;
+  --navy:#1F3A68; --navy-ink:#FFFFFF; --navy-soft:#C9D6EA; --gold:#E3A72F; --gold-ink:#2A1C00; --focus:#E3A72F;
+  --notice:#FFF6E2; --notice-ink:#5B4206; --code:#0F1A2E; --code-ink:#E4EAF5;
+  --a:#2563C9; --i:#178A55; --d:#7A3FD1;
+  --display:'Nanum Myeongjo','AppleMyungjo','Batang',serif;
+  --body:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0F1625; --surface:#172238; --surface-2:#1E2C46; --ink:#E8EDF6; --muted:#A3B0C6; --line:#2C3B57;
+  --navy:#132544; --navy-ink:#F2F5FB; --navy-soft:#A9BBD8; --gold:#F0BC52; --gold-ink:#241800; --focus:#F0BC52;
+  --notice:#2B2412; --notice-ink:#F3D898; --code:#0A111F; --code-ink:#DCE4F2;
+  --a:#78A6F2; --i:#4FC48A; --d:#B48BF2; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
+.band{background:var(--navy);color:var(--navy-ink)}
+.band .wrap{padding-block:34px 38px}
+.back{color:var(--navy-soft);font-size:13.5px;text-decoration:none}
+.back:hover{text-decoration:underline}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.25;margin:12px 0 12px;text-wrap:balance}
+.lede{color:var(--navy-soft);max-width:44em;margin:0;font-size:15.5px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pills span{font-size:13px;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:3px 12px;color:var(--navy-soft)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 0}
+nav.toc a{font-size:13.5px;font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px}
+nav.toc a:hover{border-color:var(--ink)}
+section{margin:38px 0}
+h2{font-family:var(--display);font-size:25px;line-height:1.3;margin:0 0 6px}
+.sec-sub{color:var(--muted);margin:0 0 16px;font-size:14.5px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.notice{background:var(--notice);color:var(--notice-ink);border-radius:14px;padding:14px 18px;font-size:14.5px}
+.notice b{font-weight:700}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+ol.steps>li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px 16px 64px;position:relative}
+ol.steps>li::before{content:counter(s);position:absolute;left:18px;top:16px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--navy-ink);display:grid;place-items:center;font-weight:700}
+ol.steps h3{margin:0 0 4px;font-size:17px}
+ol.steps p{margin:0 0 6px;color:var(--muted)}
+.ex{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ex b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th,td{border-top:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface-2);font-weight:700}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 9px;color:#fff}
+.prompt{position:relative;background:var(--code);color:var(--code-ink);border-radius:12px;padding:14px 16px 14px;font-size:14px;white-space:pre-wrap;margin:8px 0 0;font-family:var(--body)}
+.copy{position:absolute;top:8px;right:8px;font:inherit;font-size:12.5px;font-weight:700;border:0;border-radius:8px;padding:4px 10px;background:var(--gold);color:var(--gold-ink);cursor:pointer}
+.tpl h3{margin:0 0 2px;font-size:18px}
+.tpl p{margin:4px 0 10px;color:var(--muted);font-size:14px}
+.acts{display:flex;flex-wrap:wrap;gap:6px}
+.btn{display:inline-flex;align-items:center;min-height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+dialog{max-width:min(920px,94vw);width:100%;border:0;border-radius:16px;padding:0;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(5,14,32,.55)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.dlg-head b{font-size:15px}
+pre.code{margin:0;max-height:70vh;overflow:auto;background:var(--code);color:var(--code-ink);padding:14px 16px;font:12.5px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+ul.check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ul.check li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px 10px 44px;position:relative}
+ul.check li::before{content:"✓";position:absolute;left:14px;top:9px;width:20px;height:20px;border-radius:6px;background:var(--i);color:#fff;font-size:13px;display:grid;place-items:center;font-weight:700}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+.faq summary{font-weight:700;cursor:pointer}
+.faq p{margin:6px 0 0;color:var(--muted)}
+footer{margin:44px 0 28px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} ol.steps>li{padding-left:56px} ol.steps>li::before{left:14px}}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <a class="back" href="index.html">← 플랫폼 체험관으로</a>
+    <h1>따라 만들기 키트<br>수업에 맞춘 플랫폼, 이렇게 만들었어요</h1>
+    <p class="lede">이 키트는 완성된 플랫폼을 그대로 나눠 주는 자료가 아니에요. 우리 학교 선생님들이 수업 문제에서 출발해 도구를 함께 설계한 방법을 나눕니다. 정보 교과 전공이 아니어도, 학교 Google 계정과 생성형 AI의 도움으로 작은 것부터 시작할 수 있어요.</p>
+    <div class="pills"><span>준비물: 학교 Google 계정 · Google 스프레드시트 · 생성형 AI 대화 도구</span><span>첫 예시 따라 하기: 약 30~60분</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="toc" aria-label="키트 차례">
+    <a href="#principle">출발점</a><a href="#steps">6단계 따라 하기</a><a href="#prompts">AI에게 이렇게 요청했어요</a>
+    <a href="#deploy">배포하기</a><a href="#templates">예시 템플릿</a><a href="#privacy">개인정보·권한 점검표</a><a href="#faq">자주 막히는 곳</a>
+  </nav>
+
+  <section id="principle">
+    <h2>출발점: 도구가 아니라 수업 문제</h2>
+    <p class="sec-sub">"어떤 에듀테크를 쓸까?"보다 "우리 학생에게 어떤 학습경험이 필요하고, AI·디지털은 그 안에서 어떤 역할을 해야 할까?"를 먼저 묻습니다.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin:0 0 6px;font-size:16px">이 키트가 권하는 방식</h3>
+        <ul style="margin:0;padding-left:18px;color:var(--muted)">
+          <li>교과 교사가 학습 문제와 학생 활동을 설계하고, 기능은 그다음에 정해요.</li>
+          <li>학생이 먼저 생각하고 판단한 뒤 AI·디지털 결과를 보도록 배치해요.</li>
+          <li>한 교과, 한 차시의 작은 도구부터 만들고 수업 뒤 고쳐요.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 6px;font-size:16px">AID 수업 흐름</h3>
+        <table>
+          <tr><th style="width:34%">단계</th><th>학생 / AI·디지털의 역할</th></tr>
+          <tr><td><span class="tag" style="background:var(--a)">A</span> Assist</td><td>교사 안내와 체험으로 진입 / 자료·체험 환경</td></tr>
+          <tr><td><span class="tag" style="background:var(--i)">I</span> Independence</td><td>예측·판단·초안을 먼저 수행 / 질문·힌트·비교·기록</td></tr>
+          <tr><td><span class="tag" style="background:var(--d)">D</span> Deepen</td><td>검토·수정·재구성·공유 / 검증 대상·공유 공간</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps">
+    <h2>6단계 따라 하기</h2>
+    <p class="sec-sub">한 번 만들고 끝내지 않고, 수업에서 확인한 뒤 다시 고치는 순환이에요.</p>
+    <ol class="steps">
+      <li><h3>학습 문제 정의</h3><p>성취기준과, 학생이 실제로 어려워하는 지점을 한 문장으로 적어요.</p>
+        <div class="ex"><b>예</b> 학생들이 통계 그래프를 볼 때 그럴듯한 설명을 근거 없이 그대로 믿는다.</div></li>
+      <li><h3>학생이 먼저 할 활동 설계</h3><p>도구 없이도 학생이 먼저 해야 할 관찰·예측·선택·작성을 AID 흐름으로 정해요.</p>
+        <div class="ex"><b>예</b> 원자료 확인(A) → 모둠이 직접 도수분포표·그래프 작성(I) → AI 보고서의 주장을 수치로 검증(D)</div></li>
+      <li><h3>AI·디지털의 역할과 개입 시점 결정</h3><p>힌트·기록·측정·비교·검증 중 꼭 필요한 역할만 고르고, 언제 보여 줄지 정해요. 생성형 AI가 맞지 않으면 쓰지 않아도 돼요.</p>
+        <div class="ex"><b>예</b> AI 보고서는 학생이 그래프를 만든 뒤에만 열리고, 정답이 아니라 '틀렸을 수도 있는 주장'으로 제시한다.</div></li>
+      <li><h3>생성형 AI와 함께 만들기</h3><p>1~3단계에서 정한 내용을 그대로 AI에게 설명하고 Code.gs와 Index.html을 받아요. 아래 <a href="#prompts">요청 예시</a>를 고쳐 쓰면 돼요.</p></li>
+      <li><h3>수업에 적용하고 학습 증거 확인</h3><p>최초 생각, 수정본, 수정 이유, 측정 기록처럼 학생의 사고 과정이 남는지 봐요. 수업을 본 동료 교사의 의견도 함께 모아요.</p></li>
+      <li><h3>설계 변경과 재적용</h3><p>기능을 늘리기보다, 발견한 학습 문제를 기준으로 활동 순서·AI 개입·교사 지원을 고쳐요. 고친 내용은 '바뀐 부분만' AI에게 요청해요.</p></li>
+    </ol>
+  </section>
+
+  <section id="prompts">
+    <h2>AI에게 이렇게 요청했어요</h2>
+    <p class="sec-sub">[ ] 부분을 우리 수업에 맞게 바꿔 쓰세요. 학생 실명이나 실제 기록은 AI에게 보내지 않아요.</p>
+    <div class="card" style="margin-bottom:12px">
+      <b>처음 만들 때</b>
+<div class="prompt" id="p1">나는 중학교 [교과] 교사이고 코딩은 잘 모른다. Google 스프레드시트에 연결된 Apps Script 웹앱을 만들고 싶다.
+
+- 학습 문제: [1단계 문장]
+- 학생 활동 순서(AID): [A 단계] → [I 단계] → [D 단계]
+- AI·디지털의 역할과 시점: [예: 학생이 먼저 답을 저장한 뒤에만 참고 답변을 보여 줌]
+- 남길 기록: [예: 최초 생각, 최종 생각, 고친 이유]
+
+조건
+1. Code.gs와 Index.html 두 파일로 만들어 줘.
+2. 학생 이름 대신 반·번호·별칭만 받아 줘.
+3. 비밀번호, API 키, 다른 문서 ID를 코드에 직접 쓰지 말아 줘.
+4. 스프레드시트에 시트를 만드는 setup 함수를 넣어 줘.
+5. 붙여넣을 위치, 처음 실행할 함수, 웹 앱 배포 방법을 순서대로 알려 줘.<button class="copy" data-copy="p1">복사</button></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><b>수업 뒤 고칠 때</b>
+<div class="prompt" id="p2">수업에서 이런 문제가 있었다: [관찰한 장면].
+지금 코드는 아래와 같다. 학생 활동 순서는 바꾸지 말고 이 문제만 고쳐 줘. 바뀐 부분만 보여 주고, 어디에 붙여넣는지 알려 줘.
+[현재 코드]<button class="copy" data-copy="p2">복사</button></div></div>
+      <div class="card"><b>공개하거나 확대하기 전 점검할 때</b>
+<div class="prompt" id="p3">아래 코드를 점검해 줘.
+1. 학생 개인정보가 저장되는 곳
+2. 다른 학생의 기록을 볼 수 있는 경로
+3. 코드에 들어 있는 비밀번호·키·문서 ID
+4. 수식으로 해석될 수 있는 입력 처리
+[코드]<button class="copy" data-copy="p3">복사</button></div></div>
+    </div>
+  </section>
+
+  <section id="deploy">
+    <h2>배포하기</h2>
+    <p class="sec-sub">아래 예시 템플릿도 같은 순서로 올리면 돼요.</p>
+    <ol class="steps">
+      <li><h3>스프레드시트에서 Apps Script 열기</h3><p>새 Google 스프레드시트 → 확장 프로그램 → Apps Script</p></li>
+      <li><h3>파일 붙여넣기</h3><p>Code.gs 내용을 붙여넣고, 파일 추가(+) → HTML → 이름을 <b>Index</b>로 만든 뒤 Index.html 내용을 붙여넣어요.</p></li>
+      <li><h3>setup 한 번 실행</h3><p>위쪽 함수 목록에서 setup을 골라 실행하고 권한을 승인해요. 스프레드시트에 시트가 생겼는지 확인해요.</p></li>
+      <li><h3>웹 앱으로 배포</h3><p>배포 → 새 배포 → 유형: 웹 앱 → 실행 사용자: 나 → 액세스: 우리 학교 도메인의 사용자 → 배포. 나온 웹 앱 주소를 학생에게 안내해요.</p></li>
+      <li><h3>고친 뒤에는 '새 버전'으로</h3><p>배포 → 배포 관리 → 연필(수정) → 버전: 새 버전 → 배포. 이렇게 하면 주소가 바뀌지 않아요. '새 배포'를 누르면 주소가 바뀌어 QR과 안내 자료를 다시 만들어야 해요.</p></li>
+    </ol>
+  </section>
+
+  <section id="templates">
+    <h2>예시 템플릿</h2>
+    <p class="sec-sub">그대로 쓰기보다 우리 수업에 맞게 고쳐 쓰는 출발점이에요. '미리보기'는 저장되지 않는 체험 화면이에요.</p>
+    <div class="grid2">
+      <article class="card tpl">
+        <h3>A. 계획–집중–성찰 미니 플래너</h3>
+        <p>학생이 오늘의 계획을 세우고, 타이머로 집중한 뒤, 잘된 점·어려운 점·다음 계획을 기록해요. 교사는 스프레드시트의 '반별 요약'에서 참여를 확인해요.</p>
+        <div class="acts">
+          <a class="btn primary" href="kit/planner/Index.html" target="_blank" rel="noopener">미리보기</a>
+          <button class="btn" data-view="kit/planner/Code.gs">Code.gs 보기</button>
+          <button class="btn" data-view="kit/planner/Index.html">Index.html 보기</button>
+        </div>
+      </article>
+      <article class="card tpl">
+        <h3>B. 먼저 생각하고, AI 답과 비교하기</h3>
+        <p>학생이 자기 생각을 저장해야 AI 참고 답변이 열려요. KEEP·USE·CHANGE 중 하나를 고르고 최종 생각과 고친 이유를 남겨요. AI 답변은 교사가 미리 만들어 넣으므로 API 키가 필요 없어요.</p>
+        <div class="acts">
+          <a class="btn primary" href="kit/compare/Index.html" target="_blank" rel="noopener">미리보기</a>
+          <button class="btn" data-view="kit/compare/Code.gs">Code.gs 보기</button>
+          <button class="btn" data-view="kit/compare/Index.html">Index.html 보기</button>
+        </div>
+      </article>
+    </div>
+    <div class="notice" style="margin-top:12px"><b>B의 예시 질문</b>에 들어 있는 AI 참고 답변은 일부러 틀린 부분을 담았어요. 섭씨온도를 그대로 비례식에 넣으면 안 되기 때문이에요. 학생이 그 오류를 찾아 '내 생각을 고침'이나 '일부 가져와 씀'을 고르고 이유를 쓰도록 설계했어요.</div>
+  </section>
+
+  <section id="privacy">
+    <h2>개인정보·접근 권한 점검표</h2>
+    <p class="sec-sub">학생이 쓰기 시작하기 전에 확인해요. 학교와 교육청의 개인정보 기준이 우선이에요.</p>
+    <ul class="check">
+      <li>학생 이름 대신 반·번호·별칭처럼 꼭 필요한 최소 정보만 받는다.</li>
+      <li>웹 앱 액세스는 '우리 학교 도메인의 사용자'로 제한하고, 스프레드시트는 담당 교사만 편집하게 공유한다.</li>
+      <li>비밀번호·API 키·문서 ID를 코드에 직접 쓰지 않는다. 필요하면 Apps Script의 '스크립트 속성'에 넣는다.</li>
+      <li>생성형 AI에 학생 실명이나 실제 응답을 보내지 않는다. 코드를 점검받을 때도 가상 데이터로 바꾼다.</li>
+      <li>외부 서비스(예: Firebase)로 옮길 때는 데이터 보관 위치, 요금제와 사용료, 학교 승인 여부를 먼저 확인한다.</li>
+      <li>학년이 끝나면 기록을 내려받아 보관 기준에 따라 정리하고, 다음 해 담당자에게 운영 방법을 넘긴다.</li>
+    </ul>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>자주 막히는 곳</h2>
+    <details><summary>학생이 들어가지 못해요</summary><p>배포의 '액세스' 설정을 확인하세요. 학생이 학교 계정으로 로그인했는지도 확인해요. 설정을 바꿨다면 '새 버전'으로 다시 배포해야 반영돼요.</p></details>
+    <details><summary>코드를 고쳤는데 학생 화면이 그대로예요</summary><p>저장만 해서는 반영되지 않아요. 배포 관리 → 수정 → 새 버전으로 배포하세요.</p></details>
+    <details><summary>스프레드시트 열 이름을 바꿨더니 오류가 나요</summary><p>코드는 열 순서와 이름을 기준으로 읽어요. 열을 바꾸고 싶으면 AI에게 '이 열을 추가해 줘'처럼 코드와 함께 고쳐 달라고 하세요.</p></details>
+    <details><summary>여러 반이 동시에 쓰면 느려져요</summary><p>우리 학교도 접속이 몰리는 플랫폼은 응답이 느려져 일부를 Firebase 기반으로 옮겼어요. 먼저 한 번에 읽고 쓰는 횟수를 줄여 보고, 옮길 때는 위 점검표를 다시 확인하세요.</p></details>
+    <details><summary>AI가 만든 코드를 믿어도 될까요?</summary><p>배포 전에 가상 데이터로 직접 눌러 보고, 위 '점검할 때' 요청으로 한 번 더 확인하세요. 학생에게 AI 결과를 검증하게 하듯 교사도 같은 습관을 가져요.</p></details>
+  </section>
+
+  <footer>교육 목적이라면 이 키트와 예시 템플릿을 자유롭게 고쳐 쓰셔도 됩니다. 실제 학생 정보는 담겨 있지 않습니다.</footer>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-head"><b id="dlgTitle"></b><span class="acts"><a class="btn" id="dlgDown" download>내려받기</a><button class="btn primary" id="dlgCopy">전체 복사</button><button class="btn" id="dlgClose">닫기</button></span></div>
+  <pre class="code" id="dlgCode"></pre>
+</dialog>
+
+<script>
+(function(){
+  function copyText(t, btn){
+    var done = function(){ var o = btn.textContent; btn.textContent = '복사됨'; setTimeout(function(){ btn.textContent = o; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, fallback); else fallback();
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} ta.remove(); }
+  }
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var el = document.getElementById(b.getAttribute('data-copy')).cloneNode(true);
+      el.querySelector('.copy').remove(); copyText(el.textContent.trim(), b);
+    });
+  });
+  var dlg = document.getElementById('dlg');
+  document.querySelectorAll('[data-view]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var path = b.getAttribute('data-view');
+      document.getElementById('dlgTitle').textContent = path.split('/').slice(-2).join(' / ');
+      document.getElementById('dlgDown').href = path;
+      document.getElementById('dlgDown').setAttribute('download', path.split('/').pop());
+      var pre = document.getElementById('dlgCode'); pre.textContent = '불러오는 중…';
+      fetch(path).then(function(r){ return r.text(); }).then(function(t){ pre.textContent = t; })
+        .catch(function(){ pre.textContent = '파일을 불러오지 못했어요. 내려받기를 눌러 주세요.'; });
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+    });
+  });
+  document.getElementById('dlgClose').onclick = function(){ dlg.close ? dlg.close() : dlg.removeAttribute('open'); };
+  document.getElementById('dlgCopy').onclick = function(){ copyText(document.getElementById('dlgCode').textContent, this); };
+})();
+</script>
+</body>
+</html>
